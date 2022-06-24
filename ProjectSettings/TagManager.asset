@@ -7,8 +7,7 @@ TagManager:
   - blueObj
   - Undefined
   - redObj
-  - red
-  - blue
+  - obstacle
   layers:
   - Default
   - TransparentFX
