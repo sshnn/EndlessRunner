@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+
 
 public class GenerateLevel : MonoBehaviour
 {
@@ -31,5 +30,8 @@ public class GenerateLevel : MonoBehaviour
         creatingSection = false;
     }
 
-    
+    private void OnTriggerEnter(Collider other) 
+    {
+        Debug.Log("engel!!");
+    }
 }

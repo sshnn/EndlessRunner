@@ -11,7 +11,20 @@ public class Player : MonoBehaviour
     {
     }
 
+    private void OnTriggerEnter(Collider collision) 
+    {
+        if(collision.tag == "blueObj") {
+            GenerateLevel.scoreCount++;
+            collision.gameObject.SetActive(false);
+;
+        }
 
+        if(collision.gameObject.CompareTag ("redObj")) {
+            GenerateLevel.scoreCount--;
+            collision.gameObject.SetActive(false);
+        }
+        
+    }
     void Update()
     {
         transform.Translate(- Vector3.forward * Time.deltaTime * moveSpeed, Space.World);

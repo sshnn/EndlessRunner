@@ -6,10 +6,18 @@ public class CollectBlueObj : MonoBehaviour
 {
 
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider collision) 
     {
-        GenerateLevel.scoreCount++;
-        gameObject.SetActive(false);
+        if(collision.tag == "blueObj") {
+            GenerateLevel.scoreCount++;
+            gameObject.SetActive(false);
+        }
+
+        if(collision.gameObject.CompareTag ("redObj")) {
+            GenerateLevel.scoreCount--;
+            gameObject.SetActive(false);
+        }
+        
     }
 
     
