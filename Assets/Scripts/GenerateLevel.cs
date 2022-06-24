@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GenerateLevel : MonoBehaviour
 {
@@ -9,21 +11,15 @@ public class GenerateLevel : MonoBehaviour
     public int zPos = -55;
     public bool creatingSection = false;
     public int secNum;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public static int scoreCount = 0;
+   
     void Update()
     {
         if(creatingSection == false)
-            {
-                creatingSection = true;
-                StartCoroutine(generateSection());
-            }
+        {
+            creatingSection = true;
+            StartCoroutine(generateSection());
+        }
     }
 
     IEnumerator generateSection()
@@ -34,4 +30,6 @@ public class GenerateLevel : MonoBehaviour
         yield return new WaitForSeconds(5);
         creatingSection = false;
     }
+
+    
 }
