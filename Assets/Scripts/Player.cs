@@ -8,22 +8,15 @@ public class Player : MonoBehaviour
     public float moveSpeed = 3;
     public float leftRightSpeed = 4;
     
-
-
-
      Vector3 gravityVec;
      CharacterController controller;
  
 
 
-
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
     }
-
     
     void Update()
     {
@@ -63,6 +56,8 @@ public class Player : MonoBehaviour
 
         if(collision.tag =="obstacle") {
             collision.gameObject.SetActive(false);
+            GenerateLevel.gameOver = true;
+            GenerateLevel.scoreCount = 0;
             SceneManager.LoadScene(0);
 
         }
@@ -82,7 +77,9 @@ public class Player : MonoBehaviour
     IEnumerator fall()
     {
         if(transform.position.y < 2) {
+            GenerateLevel.gameOver = true;
             yield return new WaitForSeconds(1);
+            GenerateLevel.scoreCount = 0;
             SceneManager.LoadScene(0);
         }
     }      
