@@ -24,38 +24,13 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider collision) 
-    {
-        if(collision.tag == "blueObj") {
-            GenerateLevel.scoreCount++;
-            collision.gameObject.SetActive(false);
-;
-        }
-
-        if(collision.tag =="redObj") {
-            GenerateLevel.scoreCount--;
-            collision.gameObject.SetActive(false);
-        }
-
-        if(collision.tag =="obstacle") {
-  
-            gameObject.SetActive(false);
-            SceneManager.LoadScene(0);
-
-        }
-    }
-
-
-
-   
-
     
     void Update()
     {
         keyControl();
-        gravity();
-        
-
+        addGravity();
+        StartCoroutine(fall());
+       
     }
       
     
@@ -73,7 +48,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    void gravity()
+    private void OnTriggerEnter(Collider collision) 
+    {
+        if(collision.tag == "blueObj") {
+            GenerateLevel.scoreCount++;
+            collision.gameObject.SetActive(false);
+;
+        }
+
+        if(collision.tag =="redObj") {
+            GenerateLevel.scoreCount--;
+            collision.gameObject.SetActive(false);
+        }
+
+        if(collision.tag =="obstacle") {
+            collision.gameObject.SetActive(false);
+            SceneManager.LoadScene(0);
+
+        }
+    }
+
+    void addGravity()
     {
          gravityVec = Vector3.zero;
  
@@ -84,7 +79,11 @@ public class Player : MonoBehaviour
          controller.Move(gravityVec * Time.deltaTime );
     }
     
-        
-
-       
+    IEnumerator fall()
+    {
+        if(transform.position.y < 2) {
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene(0);
+        }
+    }      
 }
