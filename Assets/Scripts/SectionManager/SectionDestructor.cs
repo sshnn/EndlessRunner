@@ -12,18 +12,18 @@ public class SectionDestructor : MonoBehaviour
     }
     void destroySection()
     {
-       if(GenerateLevel.sectionObjs.Count > 7) 
+       if(GenerateLevel.sectionObjs.Count > 8) 
        {
-        Destroy(GenerateLevel.sectionObjs[GenerateLevel.sectionObjs.Count -8]);
-        GenerateLevel.sectionObjs.RemoveAt(GenerateLevel.sectionObjs.Count -8);
+        Destroy(GenerateLevel.sectionObjs[GenerateLevel.sectionObjs.Count -9]);
+        GenerateLevel.sectionObjs.RemoveAt(GenerateLevel.sectionObjs.Count -9);
        }
 
        if(GenerateLevel.gameOver) 
         {
             for (int i = 0; i < GenerateLevel.sectionObjs.Count; i++)
                 GenerateLevel.sectionObjs.RemoveAt(i);
-            
             GenerateLevel.gameOver = false;
         }
+
     }
 }

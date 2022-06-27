@@ -39,8 +39,8 @@ public class GenerateLevel : MonoBehaviour
     IEnumerator generateSection()
     {
         int sec = 0;
-        if(getSectionSize() > 3)
-            sec = 5;
+        if(getSectionSize() > 4)
+            sec = 6;
         addSection(Random.Range(0, 4));
         zPos -= 50;
         yield return new WaitForSeconds(sec);
