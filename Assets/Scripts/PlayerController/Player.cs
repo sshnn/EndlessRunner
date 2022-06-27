@@ -8,27 +8,30 @@ public class Player : MonoBehaviour
     public float moveSpeed = 3;
     public float leftRightSpeed = 4;
     
-     Vector3 gravityVec;
-     CharacterController controller;
- 
+    Vector3 gravityVec;
+    CharacterController controller;
+    Animator playerAnim;
+    public static int greenScore = 0;
+    public static int redScore = 0;
 
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerAnim = GetComponent<Animator>();
     }
     
     void Update()
     {
         keyControl();
         addGravity();
-        StartCoroutine(fall());
-       
+        fall();
     }
       
     
     void keyControl()
     {
+        
         controller.Move(- Vector3.forward * Time.deltaTime * moveSpeed);
 
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
@@ -43,25 +46,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision) 
     {
-        if(collision.tag == "blueObj") {
-            GenerateLevel.scoreCount++;
+        if(collision.tag == "greenObj") {
+            greenScore++;
             collision.gameObject.SetActive(false);
-;
         }
 
         if(collision.tag =="redObj") {
-            GenerateLevel.scoreCount--;
+            redScore++;
             collision.gameObject.SetActive(false);
         }
 
         if(collision.tag =="obstacle") {
-            collision.gameObject.SetActive(false);
             GenerateLevel.gameOver = true;
-            GenerateLevel.scoreCount = 0;
-            SceneManager.LoadScene(0);
-
+            stopAnim();
+            StartCoroutine(ScoreTxt.printTotalScore());
+        
         }
     }
+    
 
     void addGravity()
     {
@@ -74,13 +76,19 @@ public class Player : MonoBehaviour
          controller.Move(gravityVec * Time.deltaTime );
     }
     
-    IEnumerator fall()
+    void fall()
     {
         if(transform.position.y < 2) {
             GenerateLevel.gameOver = true;
-            yield return new WaitForSeconds(1);
-            GenerateLevel.scoreCount = 0;
-            SceneManager.LoadScene(0);
+            stopAnim();
+            StartCoroutine(ScoreTxt.printTotalScore());
         }
     }      
+
+    void stopAnim()
+    {
+        moveSpeed = 0;
+        leftRightSpeed = 0;
+        playerAnim.enabled = false;
+    }
 }

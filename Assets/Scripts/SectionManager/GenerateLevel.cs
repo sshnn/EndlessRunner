@@ -10,7 +10,6 @@ public class GenerateLevel : MonoBehaviour
     public int zPos = -55;
     public bool creatingSection = false;
     public int sectionIdx;
-    public static int scoreCount = 0;
     public static List<GameObject> sectionObjs = new List<GameObject>();
     public static bool gameOver = false;
     
@@ -19,7 +18,7 @@ public class GenerateLevel : MonoBehaviour
     void Update()
     {
         
-        if(creatingSection == false)
+        if(!creatingSection)
         {
             creatingSection = true;
             StartCoroutine(generateSection());
@@ -41,7 +40,7 @@ public class GenerateLevel : MonoBehaviour
     {
         int sec = 0;
         if(getSectionSize() > 3)
-            sec = 4;
+            sec = 5;
         addSection(Random.Range(0, 4));
         zPos -= 50;
         yield return new WaitForSeconds(sec);

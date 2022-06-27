@@ -8,8 +8,9 @@ public class MenuManager : MonoBehaviour
     public void PlayButton()
     {
         SceneManager.LoadScene(1);
+        Player.greenScore = 0;
+        Player.redScore = 0;
         GenerateLevel.gameOver = false;
-
     }
 
     public void QuitButon()
